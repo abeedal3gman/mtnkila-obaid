@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Cairo", ui-sans-serif, system-ui, sans-serif;
+  --color-primary: #eab308; /* Yellow-500 */
+  --color-secondary: #0f172a; /* Slate-900 */
+  --color-accent: #1e293b; /* Slate-800 */
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-slate-50 text-slate-900;
+    direction: rtl;
+  }
+}
+
+.geometric-border {
+  @apply border-l-4 border-primary;
+}
+
+.heading-decoration {
+  @apply underline decoration-primary underline-offset-8;
+}
+
+.block-card {
+  @apply bg-white border-2 border-slate-100 shadow-[8px_8px_0px_0px_rgba(15,23,42,0.1)];
+}
