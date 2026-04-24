@@ -88,70 +88,6 @@ const Logo = ({ className = "w-8 h-8", textColor = "text-white" }: { className?:
   </div>
 );
 
-const BrandAssets = () => {
-  const downloadLogo = () => {
-    const svg = document.getElementById('brand-logo-svg');
-    if (!svg) return;
-    const svgData = new XMLSerializer().serializeToString(svg);
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    const img = new Image();
-    img.onload = () => {
-      canvas.width = 1000;
-      canvas.height = 1000;
-      ctx?.drawImage(img, 0, 0, 1000, 1000);
-      const pngUrl = canvas.toDataURL("image/png");
-      const downloadLink = document.createElement("a");
-      downloadLink.href = pngUrl;
-      downloadLink.download = "mobile_workshop_logo.png";
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
-    };
-    img.src = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData)));
-  };
-
-  return (
-    <section id="brand" className="py-20 bg-primary/5">
-      <div className="container mx-auto px-4 text-center">
-        <div className="max-w-3xl mx-auto">
-          <span className="text-primary font-black uppercase tracking-widest text-sm mb-4 block">الهوية البصرية</span>
-          <h2 className="text-5xl font-black text-white mb-8">شعار النشاط التجاري</h2>
-          <p className="text-slate-400 font-bold mb-12 text-lg">يمكنك استخدام هذا الشعار في إعلانات جوجل والوسائل الترويجية الأخرى. الشعار مصمم بدقة عالية ليناسب كافة المقاسات.</p>
-          
-          <div className="bg-secondary p-16 rounded-3xl border-4 border-primary/20 shadow-2xl relative overflow-hidden group mb-8 inline-block">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-            
-            {/* The actual SVG for download */}
-            <div className="hidden">
-              <svg id="brand-logo-svg" width="1000" height="1000" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="24" height="24" fill="#0F172A"/> {/* background same as secondary */}
-                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.77 3.77z" stroke="#FFE135" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <circle cx="12" cy="12" r="3" stroke="#FFE135" strokeWidth="1.5"/>
-              </svg>
-            </div>
-
-            <div className="relative transform hover:scale-105 transition-transform duration-500 cursor-pointer" onClick={downloadLogo}>
-              <Logo className="w-48 h-48" />
-            </div>
-          </div>
-          
-          <div className="flex flex-col items-center gap-4">
-            <button 
-              onClick={downloadLogo}
-              className="bg-primary text-secondary px-10 py-5 rounded-xl font-black text-xl flex items-center gap-4 hover:scale-105 transition-all shadow-[8px_8px_0px_0px_rgba(255,225,53,0.2)]"
-            >
-              <Download className="w-6 h-6" />
-              تحميل الشعار للاشتراك في الإعلانات
-            </button>
-            <p className="text-slate-500 text-sm font-bold">بمجرد الضغط، سيتم تحميل الشعار بصيغة PNG وبجودة احترافية عالية.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -626,7 +562,6 @@ export default function App() {
       <Hero />
       <Stats />
       <Services />
-      <BrandAssets />
       <Features />
       <Contact />
       <Footer />
