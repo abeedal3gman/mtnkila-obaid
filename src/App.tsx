@@ -1,6 +1,6 @@
 import { motion } from 'motion/react';
-import { Phone, MessageCircle, Wrench, Zap, Cpu, Clock, Award, ShieldCheck, MapPin, CheckCircle2, Menu, X } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { Phone, MessageCircle, Wrench, Zap, Cpu, Clock, Award, ShieldCheck, MapPin, CheckCircle2, Menu, X, Download, Settings, Battery, Shield, Star, Gauge } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 
 const SERVICES_DATA = [
   {
@@ -57,6 +57,101 @@ const trackConversion = (e: React.MouseEvent<HTMLAnchorElement>) => {
   }
 };
 
+const Logo = ({ className = "w-8 h-8", textColor = "text-white" }: { className?: string, textColor?: string }) => (
+  <div className="flex items-center gap-3 group translate-y-[-2px]">
+    <div className="relative">
+      <div className="absolute inset-0 bg-primary/20 blur-xl group-hover:bg-primary/40 transition-all"></div>
+      <div className="bg-gradient-to-br from-primary to-yellow-600 p-2.5 rounded-xl shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] transform group-hover:scale-110 transition-all relative">
+        <svg 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          className={`${className} text-secondary`}
+          stroke="currentColor" 
+          strokeWidth="2.5" 
+          strokeLinecap="round" 
+          strokeLinejoin="round"
+        >
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.77 3.77z"/>
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+      </div>
+    </div>
+    <div className="flex flex-col leading-none">
+      <span className={`${textColor} text-2xl font-black tracking-tighter uppercase flex items-baseline gap-1`}>
+        ورشة <span className="text-primary italic">متنقلة</span>
+      </span>
+      <div className="flex items-center gap-2 mt-1">
+        <span className="h-[2px] w-4 bg-primary"></span>
+        <span className="text-[10px] text-primary font-black uppercase tracking-[0.2em]">PROFESSIONAL REPAIR</span>
+      </div>
+    </div>
+  </div>
+);
+
+const BrandAssets = () => {
+  const downloadLogo = () => {
+    const svg = document.getElementById('brand-logo-svg');
+    if (!svg) return;
+    const svgData = new XMLSerializer().serializeToString(svg);
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    const img = new Image();
+    img.onload = () => {
+      canvas.width = 1000;
+      canvas.height = 1000;
+      ctx?.drawImage(img, 0, 0, 1000, 1000);
+      const pngUrl = canvas.toDataURL("image/png");
+      const downloadLink = document.createElement("a");
+      downloadLink.href = pngUrl;
+      downloadLink.download = "mobile_workshop_logo.png";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    };
+    img.src = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData)));
+  };
+
+  return (
+    <section id="brand" className="py-20 bg-primary/5">
+      <div className="container mx-auto px-4 text-center">
+        <div className="max-w-3xl mx-auto">
+          <span className="text-primary font-black uppercase tracking-widest text-sm mb-4 block">الهوية البصرية</span>
+          <h2 className="text-5xl font-black text-white mb-8">شعار النشاط التجاري</h2>
+          <p className="text-slate-400 font-bold mb-12 text-lg">يمكنك استخدام هذا الشعار في إعلانات جوجل والوسائل الترويجية الأخرى. الشعار مصمم بدقة عالية ليناسب كافة المقاسات.</p>
+          
+          <div className="bg-secondary p-16 rounded-3xl border-4 border-primary/20 shadow-2xl relative overflow-hidden group mb-8 inline-block">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+            
+            {/* The actual SVG for download */}
+            <div className="hidden">
+              <svg id="brand-logo-svg" width="1000" height="1000" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="24" height="24" fill="#0F172A"/> {/* background same as secondary */}
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.77 3.77z" stroke="#FFE135" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="12" cy="12" r="3" stroke="#FFE135" strokeWidth="1.5"/>
+              </svg>
+            </div>
+
+            <div className="relative transform hover:scale-105 transition-transform duration-500 cursor-pointer" onClick={downloadLogo}>
+              <Logo className="w-48 h-48" />
+            </div>
+          </div>
+          
+          <div className="flex flex-col items-center gap-4">
+            <button 
+              onClick={downloadLogo}
+              className="bg-primary text-secondary px-10 py-5 rounded-xl font-black text-xl flex items-center gap-4 hover:scale-105 transition-all shadow-[8px_8px_0px_0px_rgba(255,225,53,0.2)]"
+            >
+              <Download className="w-6 h-6" />
+              تحميل الشعار للاشتراك في الإعلانات
+            </button>
+            <p className="text-slate-500 text-sm font-bold">بمجرد الضغط، سيتم تحميل الشعار بصيغة PNG وبجودة احترافية عالية.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -83,17 +178,7 @@ const Header = () => {
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-secondary border-b-4 border-primary py-3 shadow-xl' : 'bg-transparent py-5'}`}>
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
-        <div className="flex items-center gap-3">
-          <div className="bg-primary p-2 rounded-md">
-            <Wrench className="text-secondary w-6 h-6" />
-          </div>
-          <div className="flex flex-col leading-none">
-            <span className="text-xl font-black tracking-tighter text-white">
-              ورشة <span className="text-primary uppercase">متنقلة</span>
-            </span>
-            <span className="text-[10px] text-primary font-bold uppercase tracking-widest mt-1">احترافية 24/7</span>
-          </div>
-        </div>
+        <Logo />
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
@@ -442,12 +527,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid md:grid-cols-4 gap-12 mb-16 px-4">
           <div className="md:col-span-2 space-y-6">
-            <div className="flex items-center gap-3">
-              <div className="bg-primary p-2 rounded-md">
-                <Wrench className="text-secondary w-6 h-6" />
-              </div>
-              <span className="text-2xl font-black text-white tracking-tighter">ورشة <span className="text-primary">متنقلة</span></span>
-            </div>
+            <Logo />
             <p className="text-lg leading-relaxed max-w-md">
               نحن نقدم حلولاً احترافية لصيانة السيارات المتنقلة بأحدث التقنيات. نعتز بثقتكم ونسعى دائماً لتقديم الخدمة الأمثل في أسرع وقت.
             </p>
@@ -546,6 +626,7 @@ export default function App() {
       <Hero />
       <Stats />
       <Services />
+      <BrandAssets />
       <Features />
       <Contact />
       <Footer />
