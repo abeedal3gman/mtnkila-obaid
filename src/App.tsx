@@ -37,6 +37,26 @@ const SERVICES_DATA = [
   },
 ];
 
+const trackConversion = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const url = e.currentTarget.href;
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    e.preventDefault();
+    let fired = false;
+    const callback = () => {
+      if (!fired) {
+        fired = true;
+        window.location.href = url;
+      }
+    };
+    (window as any).gtag('event', 'conversion', {
+      'send_to': 'AW-18113999403/_oUNCL-pl6IcEKvktr1D',
+      'event_callback': callback
+    });
+    // Fallback if gtag takes too long
+    setTimeout(callback, 500);
+  }
+};
+
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -108,6 +128,7 @@ const Header = () => {
           ))}
           <a
             href="tel:0565219283"
+            onClick={trackConversion}
             className="bg-primary text-secondary px-6 py-2 text-sm font-black hover:bg-yellow-400 transition-all shadow-lg"
           >
             اتصل الآن
@@ -155,6 +176,7 @@ const Header = () => {
           <div className="pt-4 pb-2">
             <a
                href="tel:0565219283"
+               onClick={trackConversion}
                className="bg-primary text-secondary px-10 py-3 font-black inline-block"
             >
               اتصل بنا
@@ -200,6 +222,7 @@ const Hero = () => {
           <div className="flex flex-wrap gap-4">
             <a
               href="tel:0565219283"
+              onClick={trackConversion}
               className="bg-primary text-secondary px-10 py-5 text-lg font-black hover:bg-yellow-400 transition-all flex items-center gap-3 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.3)]"
             >
               <Phone className="w-6 h-6" />
@@ -207,6 +230,7 @@ const Hero = () => {
             </a>
             <a
               href="https://wa.me/966565219283"
+              onClick={trackConversion}
               className="bg-white text-secondary px-8 py-4 text-lg font-black hover:bg-slate-100 transition-all flex items-center gap-3 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.3)]"
             >
               <MessageCircle className="w-6 h-6 text-green-600" />
@@ -378,6 +402,7 @@ const Contact = () => {
             <div className="flex flex-col md:flex-row gap-6 justify-center">
               <a
                 href="tel:0565219283"
+                onClick={trackConversion}
                 className="bg-primary text-secondary px-12 py-6 text-2xl font-black flex items-center justify-center gap-4 hover:bg-yellow-400 transition-all shadow-xl"
               >
                 <Phone className="w-8 h-8 shrink-0" />
@@ -385,6 +410,7 @@ const Contact = () => {
               </a>
               <a
                 href="https://wa.me/966565219283"
+                onClick={trackConversion}
                 className="bg-white text-secondary px-12 py-6 text-2xl font-black flex items-center justify-center gap-4 hover:bg-slate-100 transition-all shadow-xl"
               >
                 <MessageCircle className="w-8 h-8 shrink-0 text-green-600" />
@@ -483,6 +509,7 @@ const FloatingAction = () => {
         whileHover={{ scale: 1.05, x: -5 }}
         whileTap={{ scale: 0.95 }}
         href="https://wa.me/966565219283"
+        onClick={trackConversion}
         className="bg-green-500 text-white px-6 py-4 rounded-md shadow-[8px_8px_0px_0px_rgba(0,0,0,0.3)] hover:bg-green-600 transition-all flex items-center gap-4 border-2 border-white/20 group"
       >
         <div className="flex flex-col items-end">
@@ -499,6 +526,7 @@ const FloatingAction = () => {
         whileHover={{ scale: 1.05, x: -5 }}
         whileTap={{ scale: 0.95 }}
         href="tel:0565219283"
+        onClick={trackConversion}
         className="bg-secondary text-primary px-6 py-4 rounded-md shadow-[8px_8px_0px_0px_rgba(0,0,0,0.3)] hover:bg-slate-800 transition-all flex items-center gap-4 border-2 border-primary/40 group"
       >
         <div className="flex flex-col items-end">
