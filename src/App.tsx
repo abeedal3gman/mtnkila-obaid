@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import { Phone, MessageCircle, Wrench, Zap, Cpu, Clock, Award, ShieldCheck, MapPin, CheckCircle2, Menu, X, Download, Settings, Battery, Shield, Star, Gauge } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
+import { SEO_KEYWORDS } from './constants';
 
 const SERVICES_DATA = [
   {
@@ -49,10 +50,9 @@ const trackConversion = (e: React.MouseEvent<HTMLAnchorElement>) => {
       }
     };
     (window as any).gtag('event', 'conversion', {
-      'send_to': 'AW-18113999403/_oUNCL-pl6IcEKvktr1D',
+      'send_to': 'AW-17118771198/s6eSCMLwhs4aEP7v7uI_',
       'event_callback': callback
     });
-    // Fallback if gtag takes too long
     setTimeout(callback, 500);
   }
 };
@@ -116,7 +116,6 @@ const Header = () => {
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
         <Logo />
 
-        {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <div 
@@ -156,13 +155,11 @@ const Header = () => {
           </a>
         </div>
 
-        {/* Mobile Toggle */}
         <button className="md:hidden text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
           {mobileMenuOpen ? <X /> : <Menu />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {mobileMenuOpen && (
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -212,7 +209,6 @@ const Header = () => {
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center bg-secondary overflow-hidden">
-      {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
           src="https://i.postimg.cc/k4mnrnys/Chat-GPT-Image-24-abryl-2026-02-36-25-m.png"
@@ -220,7 +216,6 @@ const Hero = () => {
           className="w-full h-full object-cover"
           referrerPolicy="no-referrer"
         />
-        {/* Dark overlay specifically for text readability */}
         <div className="absolute inset-0 bg-gradient-to-l from-secondary/90 via-secondary/40 to-transparent"></div>
       </div>
 
@@ -407,6 +402,44 @@ const Features = () => {
   );
 };
 
+const SEOContent = () => {
+  const faqs = [
+    {
+      q: "ما هي الخدمات التي تقدمها الورشة المتنقلة؟",
+      a: "نقدم مجموعة واسعة من الخدمات تشمل صيانة الأعطال الكهربائية، إصلاح الميكانيكا، فحص الكمبيوتر، برمجة الأنظمة، تبديل البطاريات، تغيير الزيت والفلاتر، وصيانة المكابح، وصيانة مكيف السيارة، وإصلاح الجيربوكس، وكل ذلك أمام منزلك أو في موقعك."
+    },
+    {
+      q: "هل تقومون بصيانة السيارات الألمانية مثل مرسيدس وبي ام دبليو؟",
+      a: "نعم، نحن متخصصون في صيانة السيارات الألمانية (Mercedes-Benz, BMW, Audi, Porsche, Volkswagen, Mini Cooper) بأحدث أجهزة الفحص الأصلية والبرمجيات المخصصة لكل علامة تجارية، ونوفر ميكانيكي مرسيدس متنقل خبير."
+    },
+    {
+      q: "هل تتوفر لديكم خدمة صيانة للسيارات الصينية الحديثة؟",
+      a: "بالتأكيد، لدينا خبرة واسعة في صيانة وإصلاح كافة السيارات الصينية مثل شانجان (Changan)، ام جي (MG)، هافال (Haval)، جيلي (Geely)، جيتور (Jetour)، وجاك (JAC)، مع توفير قطع الغيار اللازمة والبرمجة المتكاملة."
+    }
+  ];
+
+  return (
+    <section className="py-24 bg-white">
+      <div className="container mx-auto px-4 md:px-6 max-w-4xl">
+        <h2 className="text-3xl md:text-5xl font-black text-secondary mb-16 text-center">الأسئلة الشائعة والمعلومات التقنية</h2>
+        <div className="space-y-8">
+          {faqs.map((faq, index) => (
+            <div key={index} className="border-b border-slate-100 pb-8 hover:bg-slate-50 p-4 transition-colors rounded-lg">
+              <h3 className="text-xl font-bold text-secondary mb-4 flex items-center gap-3">
+                <span className="w-8 h-8 bg-primary text-secondary rounded-full flex items-center justify-center shrink-0 font-black text-sm">Q</span>
+                {faq.q}
+              </h3>
+              <p className="text-slate-600 leading-relaxed pr-11">
+                {faq.a}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const Contact = () => {
   return (
     <section id="contact" className="py-24 bg-slate-50">
@@ -516,6 +549,20 @@ const Footer = () => {
   );
 };
 
+const KeywordCloud = () => {
+  return (
+    <div className="sr-only" aria-hidden="true" style={{ position: 'absolute', width: '1px', height: '1px', padding: 0, margin: '-1px', overflow: 'hidden', clip: 'rect(0,0,0,0)', border: 0 }}>
+      {SEO_KEYWORDS.map((k, i) => <span key={i}>{k} </span>)}
+      <p>
+        نحن نقدم خدماتنا لجميع موديلات السيارات: مرسيدس بنز، بي ام دبليو، اودي، بورش، فولكس واجن، شانجان، ام جي، هافال، جيلي، جيتور، تويوتا، نيسان، هيونداي، كيا، فورد، جيب، لاند روفر، رينو، بيجو، فيات، وكافة السيارات الصينية والألمانية والأوروبية والأمريكية واليابانية والكورية. ورشة متنقلة بالرياض 24 ساعة - ميكانيكي متنقل - كهربائي متنقل - فحص كمبيوتر - برمجة - صيانة دورية - تبديل بطارية - تعبئة فريون - اصلاح مكيف - اصلاح قير - فحص سبيكة - تنظيف بخاخات - برمجة حساسات - اصلاح فحمات - خرط هوبات - كشف تهريب - ميكانيكي ديزل - فني هيدروليك. صيانة سيارات حي النرجس، حي الياسمين، حي الملقا، حي الصحافة، حي العقيق، حي حطين، حي القيروان، حي العارض، شمال الرياض، شرق الرياض، غرب الرياض، جنوب الرياض. رقم ميكانيكي متنقل بالرياض: 0565219283.
+      </p>
+      <div className="mt-4">
+          All Rights Reserved © {new Date().getFullYear()} - Professional Mobile Workshop Riyadh - Specialist German & Chinese Car Maintenance.
+      </div>
+    </div>
+  );
+};
+
 const FloatingAction = () => {
   return (
     <div className="fixed bottom-8 right-8 z-[70] flex flex-col gap-4">
@@ -556,6 +603,14 @@ const FloatingAction = () => {
 };
 
 export default function App() {
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'conversion', {
+        'send_to': 'AW-17118771198/s6eSCMLwhs4aEP7v7uI_'
+      });
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-slate-50 selection:bg-primary selection:text-secondary">
       <Header />
@@ -563,8 +618,10 @@ export default function App() {
       <Stats />
       <Services />
       <Features />
+      <SEOContent />
       <Contact />
       <Footer />
+      <KeywordCloud />
       <FloatingAction />
     </div>
   );
